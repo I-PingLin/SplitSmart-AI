@@ -1,0 +1,37 @@
+
+<div class="flex flex-col h-screen overflow-hidden">
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white p-4 shadow-md flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <span class="material-icons">receipt_long</span>
+      <h1 class="text-xl font-bold">SplitSmart AI</h1>
+    </div>
+    <div class="text-sm font-medium opacity-80">Zoneless Angular Bill Splitter</div>
+  </header>
+
+  <main class="flex flex-1 overflow-hidden">
+    <!-- Left Pane: Receipt Display -->
+    <div class="w-1/2 border-r border-slate-200 overflow-y-auto bg-white flex flex-col">
+      <app-receipt-display 
+        [items]="bill().items" 
+        [tax]="bill().tax" 
+        [tip]="bill().tip"
+        (upload)="onReceiptUpload($event)">
+      </app-receipt-display>
+      
+      <!-- Summary at Bottom of Left Pane -->
+      <div class="mt-auto border-t border-slate-200 p-6 bg-slate-50">
+        <app-bill-summary [summaries]="summaries()"></app-bill-summary>
+      </div>
+    </div>
+
+    <!-- Right Pane: Chat Interface -->
+    <div class="w-1/2 flex flex-col bg-slate-100">
+      <app-chat-interface 
+        [messages]="messages()" 
+        [isProcessing]="isProcessing()"
+        (sendMessage)="onSendMessage($event)">
+      </app-chat-interface>
+    </div>
+  </main>
+</div>
